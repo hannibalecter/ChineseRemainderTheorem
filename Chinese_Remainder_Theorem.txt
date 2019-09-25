@@ -1,0 +1,33 @@
+modulus := [ 3, 5, 7 ];
+remainder := [ 2, 3, 2 ];
+
+index := 1;
+
+for i in modulus do
+    prod := LCM(i,index);
+    index := prod;
+end for;
+
+p := 0;
+sm := 0;
+
+function ModularMultiplicativeInverse(aa, moduli)
+	z :=Numerator(aa) mod  moduli;
+	for j := 1 to moduli do
+		if (z*j) mod moduli eq 1 then
+			return j;
+		end if;
+    end for;
+return 1;
+end function;
+
+
+for k:= 1 to #modulus do
+    p := prod / modulus[k];
+    sm := sm +( remainder[k] * ModularMultiplicativeInverse(p , modulus[k]) * p);
+end for;
+
+print Numerator(sm) mod prod;
+
+
+
